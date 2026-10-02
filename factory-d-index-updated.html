@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1715">
+<title>FACTORY D • Operations</title>
+<style>
+:root{--bg:#0b1513;--card:#12211d;--card2:#172a25;--line:#2a4038;--text:#eef7f2;--muted:#a8bbb4;--green:#69c78e;--gold:#d7a45b;--red:#e47777}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font:14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 15%,#2d604122,transparent 25%),radial-gradient(circle at 90% 20%,#8a61221c,transparent 25%),radial-gradient(circle at 45% 100%,#23604a20,transparent 30%),var(--bg)}
+body:before{content:"🥜   🌰   🥜   🌰   🥜";position:fixed;z-index:-1;inset:0;opacity:.075;font-size:58px;line-height:2.8;letter-spacing:13px;transform:rotate(-7deg) scale(1.15);overflow:hidden}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1100px;margin:auto}.top{position:sticky;top:0;z-index:30;padding:12px;background:#0b1513ed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-weight:900;font-size:21px}.sub,.note{color:var(--muted);font-size:12px}.nav{display:flex;gap:6px;overflow:auto;margin-top:10px}.nav button,.btn{border:1px solid var(--line);background:#152721;color:var(--text);border-radius:11px;padding:9px 12px;white-space:nowrap}.nav button.on,.primary{background:var(--green)!important;color:#07140d!important;border-color:var(--green)!important;font-weight:800}
+.page{display:none;padding:14px}.page.on{display:block}.hero,.card{background:#12211de8;border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:0 12px 30px #0005}.hero{background:linear-gradient(135deg,#69c78e1e,#d7a45b16);margin-bottom:12px}.hero h1{margin:0 0 5px;font-size:23px}.title{font-size:18px;font-weight:850;margin:19px 0 9px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.action{text-align:left;background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:15px;padding:14px}.action b{display:block;margin-top:6px}.action small{color:var(--muted)}.ico{font-size:24px}.stat{padding:13px}.stat small{color:var(--muted)}.stat b{display:block;font-size:25px;margin-top:4px}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.field{display:flex;flex-direction:column;gap:5px}.full{grid-column:1/-1}label{font-size:12px;color:#b9cbc4;font-weight:750}input,select,textarea{width:100%;background:#0b1714;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;outline:0}input:focus,select:focus,textarea:focus{border-color:var(--green)}textarea{min-height:75px}.btnrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.table{overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:720px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left}th{background:#0e1a17;color:#b8cac3}.badge{display:inline-block;padding:4px 8px;border-radius:99px;background:#1c392b;color:#a8ebc1;font-size:11px}.low{background:#422326;color:#ffbcbc}.search{display:flex;gap:7px}.search input{flex:1}.step{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}.step div{border:1px solid var(--line);border-radius:9px;padding:7px;color:var(--muted);font-size:11px}.kpi{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:60;align-items:center;justify-content:center;padding:12px}.modal.show{display:flex}.modalbox{width:min(700px,100%);max-height:90vh;overflow:auto;background:#12211d;border:1px solid var(--line);border-radius:18px;padding:15px}.toast{display:none;position:fixed;right:12px;bottom:15px;z-index:90;background:#18392a;border:1px solid #4e8064;padding:11px 14px;border-radius:11px}.toast.show{display:block}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.actions{grid-template-columns:repeat(2,1fr)}.form,.grid2{grid-template-columns:1fr}.page{padding:10px}.top{padding:10px}.hero h1{font-size:21px}}@media(max-width:400px){.actions{grid-template-columns:1fr}.step{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div class="row"><div><div class="brand">🥜 FACTORY D</div><div class="sub">Value Added Factory • Operations</div></div><button class="btn primary" onclick="go('production')">＋ Production</button></div>
+<div id="nav" class="nav"></div>
+</header>
+
+<main>
+<section id="home" class="page on">
+<div class="hero"><h1>Factory D Operations</h1><div class="sub">Production • Inventory • Batch Traceability • Manpower</div></div>
+<div class="grid">
+<div class="card stat"><small>Batches</small><b id="kb">0</b></div><div class="card stat"><small>Inventory Items</small><b id="ki">0</b></div><div class="card stat"><small>Employees</small><b id="ke">0</b></div><div class="card stat"><small>Low Stock</small><b id="kl">0</b></div>
+</div>
+<div class="title">Quick Actions</div>
+<div class="actions">
+<button class="action" onclick="go('production')"><span class="ico">🏭</span><b>Today Production</b><small>Create / save batch</small></button>
+<button class="action" onclick="go('search')"><span class="ico">🔎</span><b>Search Batch</b><small>Full batch history</small></button>
+<button class="action" onclick="go('inventory')"><span class="ico">📦</span><b>Inventory</b><small>Stock & master items</small></button>
+<button class="action" onclick="go('manpower')"><span class="ico">👷</span><b>Manpower</b><small>Name + shift + edit</small></button>
+<button class="action" onclick="go('reports')"><span class="ico">📊</span><b>Reports</b><small>Production summary</small></button>
+<button class="action" onclick="backup()"><span class="ico">💾</span><b>Backup</b><small>Save local data</small></button>
+</div>
+<div class="title">Recent Activity</div><div id="recent" class="card"></div>
+</section>
+
+<section id="production" class="page">
+<div class="hero"><h1>🏭 Today Production</h1><div class="sub">One batch can contain multiple package sizes. Stock is updated when saved.</div></div>
+<div id="steps" class="step"></div>
+<div class="card">
+<div class="form">
+<div class="field"><label>Product / Seasoning</label><select id="prod"></select></div>
+<div class="field"><label>Batch Number</label><input id="batch" placeholder="BF-0930ARPP01"></div>
+<div class="field"><label>Raw Material</label><select id="raw"></select></div>
+<div class="field"><label>Variant</label><select id="variant"></select></div>
+<div class="field"><label>Raw Quantity (KG)</label><input id="rawqty" type="number" min="0" step=".001"></div>
+<div class="field"><label>Roasting Operator</label><select id="op"></select></div>
+<div class="field"><label>Seasoning Person</label><select id="season"></select></div>
+<div class="field"><label>Cooling Time (minutes)</label><input id="cool" type="number" value="30"></div>
+
+<div class="field full"><label>Packed Members — minimum 6</label><div class="grid2"><input id="m1" placeholder="Member 1"><input id="m2" placeholder="Member 2"><input id="m3" placeholder="Member 3"><input id="m4" placeholder="Member 4"><input id="m5" placeholder="Member 5"><input id="m6" placeholder="Member 6"></div></div>
+<div class="field"><label>Nitrogen Value</label><input id="nitro" placeholder="Value"></div>
+<div class="field"><label>Pouch Material</label><select id="pmat"></select></div>
+<div class="field"><label>Total Pouch Taken</label><input id="ptaken" type="number" min="0" value="0"></div>
+<div class="field"><label>FG</label><input id="fg" type="number" min="0" step=".001" value="0"></div>
+<div class="field"><label>FG Damage</label><input id="damage" type="number" min="0" step=".001" value="0"></div>
+<div class="field"><label>FG Return</label><input id="ret" type="number" min="0" step=".001" value="0"></div>
+<div class="field"><label>FG Rejection</label><input id="rej" type="number" min="0" step=".001" value="0"></div>
+<div class="field"><label>Self Life</label><input id="life" placeholder="6 Months"></div>
+
+<div class="field full"><label>Packed Quantity — enter each package size used in this batch</label><div class="grid2">
+<div class="card"><label>100G Pouches</label><input id="q100" type="number" min="0" value="0"></div>
+<div class="card"><label>1KG Pouches</label><input id="q1k" type="number" min="0" value="0"></div>
+<div class="card"><label>200G Pouches</label><input id="q200" type="number" min="0" value="0"></div>
+<div class="card"><label>15G / Sample Pouches</label><input id="q15" type="number" min="0" value="0"></div>
+</div></div>
+
+<div class="field"><label>Packing Material Taken</label><input id="taken" type="number" min="0" value="0"></div>
+<div class="field"><label>Packing Material Used</label><input id="used" type="number" min="0" value="0"></div>
+<div class="field"><label>Packing Material Damage</label><input id="mdamage" type="number" min="0" value="0"></div>
+<div class="field"><label>Packing Material Return</label><input id="mreturn" type="number" min="0" value="0"></div>
+<div class="field"><label>Box Variant</label><select id="box"></select></div>
+<div class="field"><label>Boxes Taken</label><input id="btaken" type="number" min="0" value="0"></div>
+<div class="field"><label>Boxes Return</label><input id="breturn" type="number" min="0" value="0"></div>
+<div class="field"><label>Pouches Per Box</label><input id="perbox" type="number" min="0" value="0"></div>
+<div class="field"><label>Pallet Number</label><input id="pallet"></div>
+<div class="field"><label>Movement Person</label><select id="move"></select></div>
+<div class="field full"><label>BMR / LOG SHEET Upload</label><input id="file" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,.xlsx,.xls,.doc,.docx"></div>
+<div class="field full"><label>Notes</label><textarea id="notes"></textarea></div>
+</div>
+<div class="btnrow"><button class="btn primary" onclick="saveBatch()">✓ Save Batch</button><button class="btn" onclick="clearForm()">Clear</button></div>
+<div class="note" style="margin-top:9px">Raw material, pouch counts, packing material and boxes are deducted from inventory. Returns are added back. Existing stock is never deducted twice because a batch number cannot be duplicated.</div>
+</div>
+</section>
+
+<section id="search" class="page">
+<div class="hero"><h1>🔎 Batch Search</h1><div class="sub">Search a saved batch number and view its production history.</div></div>
+<div class="card"><div class="search"><input id="sq" placeholder="BF-0930ARPP01" oninput="search()"><button class="btn primary" onclick="search()">Search</button></div></div>
+<div id="results"></div>
+</section>
+
+<section id="inventory" class="page">
+<div class="hero"><h1>📦 Inventory</h1><div class="sub">Edit opening/current stock here. Production transactions update stock automatically.</div></div>
+<div class="card">
+<button class="btn primary" onclick="itemModal()">＋ Add Inventory Item</button>
+<div class="table"><table><thead><tr><th>Category</th><th>Item</th><th>Unit</th><th>Stock</th><th>Min</th><th>Status</th><th>Edit</th></tr></thead><tbody id="ib"></tbody></table></div>
+</div>
+</section>
+
+<section id="manpower" class="page">
+<div class="hero"><h1>👷 Manpower</h1><div class="sub">Employee name and shift. Edit anytime.</div></div>
+<div class="card"><button class="btn primary" onclick="empModal()">＋ Add Employee</button><div class="table"><table><thead><tr><th>Employee</th><th>Shift</th><th>Edit</th></tr></thead><tbody id="eb"></tbody></table></div></div>
+</section>
+
+<section id="reports" class="page">
+<div class="hero"><h1>📊 Reports</h1><div class="sub">Basic production summary from saved batches.</div></div>
+<div class="grid2"><div class="card"><div class="kpi"><span>Batches</span><b id="rb">0</b></div><div class="kpi"><span>FG</span><b id="rf">0</b></div><div class="kpi"><span>Rejection</span><b id="rr">0</b></div></div><div class="card"><div class="kpi"><span>Inventory Items</span><b id="ri">0</b></div><div class="kpi"><span>Low Stock</span><b id="rl">0</b></div></div></div>
+<div class="title">Production History</div><div class="card table"><table><thead><tr><th>Date</th><th>Batch</th><th>Product</th><th>Raw KG</th><th>FG</th><th>Rejection</th></tr></thead><tbody id="rbod"></tbody></table></div>
+</section>
+</main>
+</div>
+
+<div id="modal" class="modal"><div class="modalbox"><div class="row"><h2 id="mt">Edit</h2><button class="btn" onclick="closeModal()">×</button></div><div id="mb"></div></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const RAW=["NP Regular","NP USA","NP Jumbo","NP Regular Touch","NP USA Touch","NP Jumbo Touch","NP Regular Pieces","NP USA Pieces","NP Jumbo Pieces","NP Dark","NP Shrunk","IP Regular","IP Large","IP Jumbo","IP Regular Touch","IP USA Touch","IP Jumbo Touch","IP Regular Pieces","IP USA Pieces","IP Jumbo Pieces","IP Dark","IP Shrunk","WALNUT HALF","WALNUT QUARTER","WALNUT PIECES"];
+const PACK=["1KG ALMOND POUCH","1KG WALNUT POUCH","200G ROASTED AND SALTED POUCH","200G RAW ALMOND POUCH","200G DRY ROASTED WALNUT POUCH","500G RAW ALMONDS POUCH","100G BUTTER TOFFEE POUCH","100G JALAPENO CHEESE POUCH","100G HONEY ROASTED WALNUT POUCH","100G PERI PERI POUCH","100G HOT AND SPICY POUCH","15G PERI PERI POUCH","15G HOT AND SPICY POUCH","1 LITTER ALMOND OIL TIN","5 LITTER ALMOND OIL TIN","100ML ALMOND OIL BOTTLE","50 ML ALMOND OIL BOTTLE","100 ML ALMOND OIL STICKER","50 ML ALMOND OIL STICKER","100 ML ALMOND OIL TAG","10 KG WALNUT BOX","10 KG 5 PLY CALIFORNIA BOX","Brown Box","Almond Oil Display Box","VACUUM PACK TRANSPARENT POUCH","HALF BOX 250G","WALNUT QUARTER 250G BLACK BOX","WALNUT PIECES 250G BLACK BOX","WALNUT QUARTER 250G WHITE BOX","WALNUT PIECES 250G WHITE BOX"];
+const PROD=["Peri Peri","Hot and Spicy","Butter Toffee","Jalapeno Cheese","Honey Roasted Walnut","Roasted & Salted","Dry Roasted Walnut","Raw Almond","Raw Walnut","Almond Oil"];
+const KEY="factoryD_final_v2";
+let db=JSON.parse(localStorage.getItem(KEY)||"null")||{employees:[],inventory:[],batches:[]};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nav=[["home","⌂ Home"],["production","🏭 Production"],["search","🔎 Batches"],["inventory","📦 Inventory"],["manpower","👷 Manpower"],["reports","📊 Reports"]];
+$("nav").innerHTML=nav.map(x=>`<button data-p="${x[0]}" onclick="go('${x[0]}')">${x[1]}</button>`).join("");
+function go(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));$(id).classList.add("on");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.p==id));render();}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));render()}
+function msg(s){$("toast").textContent=s;$("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),2300)}
+function opts(a,p="Select"){return `<option value="">${p}</option>`+a.map(x=>`<option>${esc(x)}</option>`).join("")}
+function init(){
+ if(!db.inventory.length){
+  let names=[...RAW,...PACK,"Pouch Sticker","Box Sticker"];
+  db.inventory=names.map((name,i)=>({id:"i"+i,category:RAW.includes(name)?"Raw Material":(name.includes("STICKER")||name.includes("TAG")||name.includes("Sticker")?"Sticker":(name.includes("BOX")||name.includes("Box")?"Box":"Packing Material")),name,unit:RAW.includes(name)?"KG":"PCS",stock:0,min:10}));
+  localStorage.setItem(KEY,JSON.stringify(db));
+ }
+ render();
+ search();
+}
+function fill(){
+ $("prod").innerHTML=opts(PROD);
+ $("raw").innerHTML=opts(RAW);
+ $("variant").innerHTML=opts(RAW);
+ let names=db.employees.map(x=>x.name);
+ $("op").innerHTML=opts(names);$("season").innerHTML=opts(names);$("move").innerHTML=opts(names);
+ let ps=db.inventory.filter(x=>x.category==="Packing Material"||x.category==="Sticker").map(x=>x.name);
+ $("pmat").innerHTML=opts(ps);
+ $("box").innerHTML=opts(db.inventory.filter(x=>x.category==="Box").map(x=>x.name));
+}
+function inv(n){return db.inventory.find(x=>x.name===n)}
+function change(n,d){let x=inv(n);if(!x)return true;if(x.stock+d<-.000001)return false;x.stock=Math.max(0,x.stock+d);return true}
+function pouch(size){
+ let pre=size==="100"?"100G":size==="1000"?"1KG":size==="200"?"200G":"15G";
+ let a=db.inventory.filter(x=>x.name.startsWith(pre));
+ let p=$("prod").value.toUpperCase();
+ if(size==="100"){let z=p.includes("PERI")?"PERI PERI":p.includes("HOT")?"HOT AND SPICY":p.includes("BUTTER")?"BUTTER TOFFEE":p.includes("JALAPENO")?"JALAPENO":p.includes("HONEY")?"HONEY":"";
+  if(z)return a.find(x=>x.name.includes(z))?.name||a[0]?.name;
+ }
+ return a[0]?.name;
+}
+function saveBatch(){
+ let b=$("batch").value.trim(),rq=+$("rawqty").value||0;
+ if(!b||!$("prod").value||!$("raw").value||!rq)return msg("Batch, product, raw material and quantity are required");
+ if(db.batches.some(x=>x.batch.toLowerCase()===b.toLowerCase()))return msg("Batch number already exists");
+ if(!inv($("raw").value)||inv($("raw").value).stock<rq)return msg("Insufficient raw material stock");
+ let adds=[],push=(n,d)=>{if(n&&d)adds.push([n,d])};
+ push($("raw").value,-rq);
+ push($("pmat").value,-(+$("used").value||0));
+ push($("box").value,-(+$("btaken").value||0));
+ [["100",$("q100").value],["1000",$("q1k").value],["200",$("q200").value],["15",$("q15").value]].forEach(([s,q])=>{q=+q||0;if(q){let n=pouch(s);if(n)push(n,-q)}});
+ for(const [n,d] of adds)if(inv(n)&&inv(n).stock+d<0)return msg("Insufficient stock: "+n);
+ adds.forEach(x=>change(x[0],x[1]));
+ if($("pmat").value)change($("pmat").value,+$("mreturn").value||0);
+ if($("box").value)change($("box").value,+$("breturn").value||0);
+ let f=$("file").files[0];
+ db.batches.unshift({id:Date.now(),date:new Date().toISOString(),batch:b,product:$("prod").value,raw:$("raw").value,variant:$("variant").value,rawqty:rq,op:$("op").value,season:$("season").value,cool:+$("cool").value||0,members:[$("m1").value,$("m2").value,$("m3").value,$("m4").value,$("m5").value,$("m6").value].filter(Boolean),nitro:$("nitro").value,pmat:$("pmat").value,taken:+$("taken").value||0,used:+$("used").value||0,mdamage:+$("mdamage").value||0,mreturn:+$("mreturn").value||0,q100:+$("q100").value||0,q1k:+$("q1k").value||0,q200:+$("q200").value||0,q15:+$("q15").value||0,ptaken:+$("ptaken").value||0,fg:+$("fg").value||0,damage:+$("damage").value||0,ret:+$("ret").value||0,rej:+$("rej").value||0,life:$("life").value,perbox:+$("perbox").value||0,box:$("box").value,btaken:+$("btaken").value||0,breturn:+$("breturn").value||0,pallet:$("pallet").value,move:$("move").value,file:f?f.name:"",notes:$("notes").value});
+ save();clearForm();msg("Batch saved • inventory updated");go("search");$("sq").value=b;search();
+}
+function clearForm(){document.querySelectorAll("#production input,#production textarea").forEach(x=>{if(x.type==="file")x.value="";else if(x.id!=="cool")x.value=""});$("cool").value=30;["q100","q1k","q200","q15","ptaken","taken","used","mdamage","mreturn","btaken","breturn","perbox","fg","damage","ret","rej"].forEach(id=>$(id).value=0);fill()}
+function search(){
+ let q=($("sq")?.value||"").toLowerCase(),a=q?db.batches.filter(x=>x.batch.toLowerCase().includes(q)):db.batches.slice(0,10);
+ $("results").innerHTML=a.length?a.map(x=>`<div class="card" style="margin-top:10px"><div class="row"><div><h3 style="margin:0">${esc(x.batch)}</h3><div class="note">${new Date(x.date).toLocaleString()} • ${esc(x.product)}</div></div><span class="badge">Saved</span></div><div class="grid2"><div><div class="kpi"><span>Raw</span><b>${esc(x.raw)} • ${x.rawqty} KG</b></div><div class="kpi"><span>Roasting</span><b>${esc(x.op)||"—"}</b></div><div class="kpi"><span>Seasoning</span><b>${esc(x.season)||"—"}</b></div><div class="kpi"><span>Cooling</span><b>${x.cool} min</b></div></div><div><div class="kpi"><span>100G</span><b>${x.q100}</b></div><div class="kpi"><span>1KG</span><b>${x.q1k}</b></div><div class="kpi"><span>200G</span><b>${x.q200}</b></div><div class="kpi"><span>15G</span><b>${x.q15}</b></div><div class="kpi"><span>FG / Rejection</span><b>${x.fg} / ${x.rej}</b></div></div></div><div class="note" style="margin-top:8px">Members: ${esc(x.members.join(", ")||"—")}<br>Material: ${esc(x.pmat||"—")} • Taken ${x.taken} • Used ${x.used} • Damage ${x.mdamage} • Return ${x.mreturn}<br>Box: ${esc(x.box||"—")} • Taken ${x.btaken} • Return ${x.breturn}<br>Self life: ${esc(x.life||"—")} • Pallet: ${esc(x.pallet||"—")} • Movement: ${esc(x.move||"—")}<br>BMR/Log: ${esc(x.file||"—")}<br>${esc(x.notes||"")}</div></div>`).join(""):`<div class="card" style="margin-top:10px;text-align:center;color:var(--muted)">No batch found.</div>`;
+}
+function renderInv(){
+ $("ib").innerHTML=db.inventory.map(x=>`<tr><td>${esc(x.category)}</td><td>${esc(x.name)}</td><td>${x.unit}</td><td><b>${x.stock}</b></td><td>${x.min}</td><td>${x.stock<=x.min?'<span class="badge low">LOW</span>':'<span class="badge">OK</span>'}</td><td><button class="btn" onclick="itemModal('${x.id}')">✏️ Edit</button></td></tr>`).join("");
+}
+function itemModal(id=""){
+ let x=db.inventory.find(a=>a.id===id)||{category:"Raw Material",name:"",unit:"KG",stock:0,min:10};
+ $("mt").textContent=id?"Edit Inventory":"Add Inventory";
+ $("mb").innerHTML=`<div class="form"><div class="field"><label>Category</label><select id="mc"><option>Raw Material</option><option>Packing Material</option><option>Sticker</option><option>Box</option></select></div><div class="field"><label>Item Name</label><input id="mn" value="${esc(x.name)}"></div><div class="field"><label>Unit</label><select id="mu"><option>KG</option><option>PCS</option><option>LITRE</option><option>BOX</option></select></div><div class="field"><label>Current Stock</label><input id="ms" type="number" step=".001" value="${x.stock}"></div><div class="field"><label>Low Stock Minimum</label><input id="mm" type="number" step=".001" value="${x.min}"></div></div><div class="btnrow"><button class="btn primary" onclick="saveItem('${id}')">Save</button></div>`;
+ $("mc").value=x.category;$("mu").value=x.unit;$("modal").classList.add("show");
+}
+function saveItem(id){
+ let n=$("mn").value.trim();if(!n)return msg("Item name required");
+ if(db.inventory.some(x=>x.name.toLowerCase()===n.toLowerCase()&&x.id!==id))return msg("Item already exists");
+ let x={id:id||"i"+Date.now(),category:$("mc").value,name:n,unit:$("mu").value,stock:+$("ms").value||0,min:+$("mm").value||0};
+ if(id)db.inventory[db.inventory.findIndex(a=>a.id===id)]=x;else db.inventory.push(x);
+ save();closeModal();msg("Inventory saved");
+}
+function empModal(id=""){
+ let x=db.employees.find(a=>a.id===id)||{name:"",shift:""};
+ $("mt").textContent=id?"Edit Employee":"Add Employee";
+ $("mb").innerHTML=`<div class="form"><div class="field"><label>Employee Name</label><input id="en" value="${esc(x.name)}"></div><div class="field"><label>Shift</label><input id="es" placeholder="A / B / C / General" value="${esc(x.shift)}"></div></div><div class="btnrow"><button class="btn primary" onclick="saveEmp('${id}')">Save</button></div>`;
+ $("modal").classList.add("show");
+}
+function saveEmp(id){
+ let n=$("en").value.trim();if(!n)return msg("Employee name required");
+ let x={id:id||"e"+Date.now(),name:n,shift:$("es").value.trim()};
+ if(id)db.employees[db.employees.findIndex(a=>a.id===id)]=x;else db.employees.push(x);
+ save();closeModal();msg("Employee saved");
+}
+function renderEmp(){
+ $("eb").innerHTML=db.employees.map(x=>`<tr><td>${esc(x.name)}</td><td>${esc(x.shift)}</td><td><button class="btn" onclick="empModal('${x.id}')">✏️ Edit</button></td></tr>`).join("")||`<tr><td colspan="3" style="text-align:center;color:var(--muted)">No employees yet.</td></tr>`;
+}
+function closeModal(){$("modal").classList.remove("show")}
+function backup(){
+ let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"}));a.download="factory-d-backup.json";a.click();msg("Backup downloaded");
+}
+function render(){
+ fill();renderInv();renderEmp();
+ $("kb").textContent=db.batches.length;$("ki").textContent=db.inventory.length;$("ke").textContent=db.employees.length;$("kl").textContent=db.inventory.filter(x=>x.stock<=x.min).length;
+ $("rb").textContent=db.batches.length;$("ri").textContent=db.inventory.length;$("rl").textContent=db.inventory.filter(x=>x.stock<=x.min).length;$("rf").textContent=db.batches.reduce((a,x)=>a+(x.fg||0),0);$("rr").textContent=db.batches.reduce((a,x)=>a+(x.rej||0),0);
+ $("rbod").innerHTML=db.batches.map(x=>`<tr><td>${new Date(x.date).toLocaleDateString()}</td><td>${esc(x.batch)}</td><td>${esc(x.product)}</td><td>${x.rawqty}</td><td>${x.fg}</td><td>${x.rej}</td></tr>`).join("");
+ $("recent").innerHTML=db.batches.slice(0,5).map(x=>`<div class="kpi"><span>🏭 ${esc(x.batch)} • ${esc(x.product)}</span><b>${new Date(x.date).toLocaleDateString()}</b></div>`).join("")||`<div style="text-align:center;color:var(--muted);padding:18px">No production activity yet.</div>`;
+ $("steps").innerHTML=["Today","Batch","Raw","Variant","Qty","Operator","Seasoning","Cooling","Members","Nitrogen","Packed Qty","Pouches","FG","Damage","Return","Rejection","BMR/Log","Pouch/Box","Box","Pallet","Movement"].map((x,i)=>`<div>${i+1}. ${x}</div>`).join("");
+}
+init();
+</script>
+</body>
+</html>
